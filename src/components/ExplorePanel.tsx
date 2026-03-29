@@ -5,6 +5,7 @@ import { findBook } from '@/data/books';
 import BookSelector from './BookSelector';
 import TopicSelector from './TopicSelector';
 import PromptCard from './PromptCard';
+import ShareButtons from './ShareButtons';
 import { generateExplorePrompts } from '@/lib/api';
 
 /**
@@ -112,6 +113,7 @@ export default function ExplorePanel() {
           {prompts.map((prompt, i) => (
             <PromptCard key={i} prompt={prompt} compact={false} />
           ))}
+          <ShareButtons prompts={prompts} />
         </div>
       )}
     </div>

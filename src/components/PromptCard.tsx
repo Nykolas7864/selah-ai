@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { GeneratedPrompt } from '@/types';
 import VerseDisplay from './VerseDisplay';
+import { formatPromptAsText, copyToClipboard } from '@/lib/formatPrompt';
 
 interface PromptCardProps {
   prompt: GeneratedPrompt;
@@ -19,6 +20,16 @@ interface PromptCardProps {
  */
 export default function PromptCard({ prompt, compact = true }: PromptCardProps) {
   const [expanded, setExpanded] = useState(!compact);
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const success = await copyToClipboard(formatPromptAsText(prompt));
+    if (success) {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  };
 
   return (
     <article
@@ -105,16 +116,25 @@ export default function PromptCard({ prompt, compact = true }: PromptCardProps) 
               </div>
             )}
 
-            {/* Collapse button */}
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                setExpanded(false);
-              }}
-              className="text-sm text-olive-400 hover:text-olive-600 font-sans transition-colors"
-            >
-              &larr; Collapse
-            </button>
+            {/* Collapse + Copy buttons */}
+            <div className="flex items-center gap-4">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setExpanded(false);
+                }}
+                className="text-sm text-olive-400 hover:text-olive-600 font-sans transition-colors"
+              >
+                &larr; Collapse
+              </button>
+              <button
+                onClick={handleCopy}
+                className="text-sm text-olive-400 hover:text-olive-600 font-sans transition-colors flex items-center gap-1"
+              >
+                <span>📋</span>
+                <span>{copied ? 'Copied!' : 'Copy'}</span>
+              </button>
+            </div>
           </div>
         )}
       </div>

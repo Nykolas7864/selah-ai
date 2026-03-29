@@ -5,6 +5,7 @@ import Header from '@/components/Header';
 import PromptCard from '@/components/PromptCard';
 import ExplorePanel from '@/components/ExplorePanel';
 import LoadingState from '@/components/LoadingState';
+import ShareButtons from '@/components/ShareButtons';
 import { generateRandomSeeds, markSeedsAsDisplayed } from '@/lib/randomEngine';
 import { generatePromptsFromSeeds } from '@/lib/api';
 
@@ -76,6 +77,10 @@ export default function App() {
             {!loading && !error && dailyPrompts.map((prompt, i) => (
               <PromptCard key={i} prompt={prompt} compact />
             ))}
+
+            {!loading && !error && dailyPrompts.length > 0 && (
+              <ShareButtons prompts={dailyPrompts} />
+            )}
 
             {/* Refresh button */}
             {!loading && !error && (
