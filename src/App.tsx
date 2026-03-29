@@ -10,6 +10,7 @@ import GlossaryPage from '@/components/GlossaryPage';
 import ReadingPlanPage from '@/components/ReadingPlanPage';
 import { generateRandomSeeds, markSeedsAsDisplayed } from '@/lib/randomEngine';
 import { generatePromptsFromSeeds } from '@/lib/api';
+import ErrorBoundary from '@/components/ErrorBoundary';
 
 export default function App() {
   const [view, setView] = useState<AppView>('home');
@@ -44,6 +45,7 @@ export default function App() {
   }, [loadDailyPrompts]);
 
   return (
+    <ErrorBoundary>
     <div className="min-h-screen bg-parchment-50">
       <Header currentView={view} onNavigate={setView} />
 
@@ -115,5 +117,6 @@ export default function App() {
         {view === 'reading-plan' && <ReadingPlanPage />}
       </main>
     </div>
+    </ErrorBoundary>
   );
 }
