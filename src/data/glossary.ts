@@ -28,6 +28,20 @@ export const GLOSSARY_ENTRIES: GlossaryEntry[] = [
     keyVerses: ['Genesis 4:2', 'Genesis 4:8', 'Hebrews 11:4'],
   },
   {
+    name: 'Abraham',
+    alternateNames: ['Abram'],
+    nameMeaning: '"Father of a multitude" (Hebrew: אַבְרָהָם; original name Abram means "exalted father")',
+    testament: 'OT',
+    summary: 'The founding patriarch of Israel, called by God out of Ur of the Chaldeans to a land of promise. God made an everlasting covenant with him, promising land, descendants, and that all nations would be blessed through him — fulfilled ultimately in Jesus Christ.',
+    keyRelationships: [
+      { name: 'Sarah', relationship: 'Husband of' },
+      { name: 'Hagar', relationship: 'Father of son through' },
+      { name: 'Isaac', relationship: 'Father of' },
+      { name: 'Ishmael', relationship: 'Father of' },
+    ],
+    keyVerses: ['Genesis 12:1', 'Genesis 15:6', 'Genesis 22:18', 'Hebrews 11:8'],
+  },
+  {
     name: 'Absalom',
     alternateNames: [],
     nameMeaning: '"Father of peace" (Hebrew: אַבְשָׁלֹום)',
