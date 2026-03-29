@@ -25,4 +25,22 @@
   .animate-fadeIn {
     animation: fadeIn 0.3s ease-out;
   }
+
+  @keyframes slideInRight {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+  }
+
+  @keyframes slideUpFromBottom {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+  }
+
+  .animate-slideInRight {
+    animation: slideInRight 0.25s ease-out;
+  }
+
+  .animate-slideUpFromBottom {
+    animation: slideUpFromBottom 0.3s ease-out;
+  }
 }
