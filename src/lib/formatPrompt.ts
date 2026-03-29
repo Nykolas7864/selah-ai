@@ -1,24 +1,4 @@
-import type { GeneratedPrompt } from '@/types';
-
-// These types will be added in Feature 4; defined inline here for now
-interface ReadingPlanEntry {
-  day: number;
-  book: string;
-  chapters: string;
-  description: string;
-}
-
-interface ReadingPlan {
-  title: string;
-  description: string;
-  timeline: string;
-  totalDays: number;
-  entries: ReadingPlanEntry[];
-}
-
-interface ReadingPlanProgress {
-  completedDays: number[];
-}
+import type { GeneratedPrompt, ReadingPlan, ReadingPlanProgress } from '@/types';
 
 /**
  * Format a single prompt as readable plain text.

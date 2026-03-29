@@ -7,6 +7,7 @@ import ExplorePanel from '@/components/ExplorePanel';
 import LoadingState from '@/components/LoadingState';
 import ShareButtons from '@/components/ShareButtons';
 import GlossaryPage from '@/components/GlossaryPage';
+import ReadingPlanPage from '@/components/ReadingPlanPage';
 import { generateRandomSeeds, markSeedsAsDisplayed } from '@/lib/randomEngine';
 import { generatePromptsFromSeeds } from '@/lib/api';
 
@@ -111,6 +112,7 @@ export default function App() {
 
         {view === 'explore' && <ExplorePanel />}
         {view === 'glossary' && <GlossaryPage />}
+        {view === 'reading-plan' && <ReadingPlanPage />}
       </main>
     </div>
   );

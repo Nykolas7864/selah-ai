@@ -2,6 +2,7 @@ import type {
   GeneratedPrompt,
   GeneratePromptsResponse,
   PromptSeed,
+  ReadingPlan,
 } from '@/types';
 import type { StudyTopic } from '@/data/books';
 
@@ -39,6 +40,31 @@ export async function generatePromptsFromSeeds(
   }
 
   return data.prompts;
+}
+
+/**
+ * Generate a personalized reading plan via the AI backend.
+ */
+export async function generateReadingPlan(options: {
+  topics: string[];
+  customDescription?: string;
+  timeline: string;
+}): Promise<ReadingPlan> {
+  const response = await fetch(`${API_BASE}/generate-reading-plan`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(options),
+  });
+
+  if (!response.ok) {
+    const errBody = await response.json().catch(() => ({}));
+    throw new Error(
+      (errBody as { error?: string }).error ?? `API error: ${response.status}`
+    );
+  }
+
+  const data = (await response.json()) as { plan: Omit<ReadingPlan, 'createdAt'> };
+  return { ...data.plan, createdAt: new Date().toISOString() };
 }
 
 /**

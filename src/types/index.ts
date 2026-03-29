@@ -55,6 +55,58 @@ export interface ExploreRequest {
 /** View state for the app */
 export type AppView = 'home' | 'explore' | 'glossary' | 'reading-plan';
 
+export interface ReadingPlanEntry {
+  day: number;
+  book: string;
+  chapters: string; // e.g. "1-3" or "5"
+  description: string; // why this reading matters for the topic
+}
+
+export interface ReadingPlan {
+  title: string;
+  description: string;
+  topics: string[];
+  customDescription?: string;
+  timeline: string;
+  totalDays: number;
+  entries: ReadingPlanEntry[];
+  createdAt: string; // ISO date string
+}
+
+export interface ReadingPlanProgress {
+  completedDays: number[];
+}
+
+export const PLAN_TOPICS = [
+  'The Apostles & Disciples',
+  'Miracles of Jesus',
+  'Old Testament Prophecy',
+  'Wisdom Literature',
+  'The Early Church',
+  'Women of the Bible',
+  'Parables of Jesus',
+  'Creation & Genesis',
+  'Kings & Kingdoms',
+  'The Psalms & Worship',
+  "Paul's Missionary Journeys",
+  'Covenant History',
+  'Suffering & Perseverance',
+  'Prayer in Scripture',
+  'The Life of Christ',
+  'Prophets & Their Messages',
+] as const;
+
+export type PlanTopic = typeof PLAN_TOPICS[number];
+
+export const PLAN_TIMELINES = [
+  '1 week',
+  '2 weeks',
+  '1 month',
+  '3 months',
+  '6 months',
+  '1 year',
+] as const;
+
 export interface GlossaryRelationship {
   name: string;
   relationship: string; // e.g. "Father of", "Wife of", "Disciple"
