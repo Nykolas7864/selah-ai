@@ -122,22 +122,27 @@ For Netlify deployment: set these in Netlify Dashboard → Site → Environment 
 ## Known TODOs and Implementation Notes
 
 ### Must Fix Before First Run
-- [ ] Path aliases: Vite config has `@/` alias but TypeScript paths need to resolve correctly. May need to verify `vite-tsconfig-paths` or adjust.
-- [ ] The Netlify Function uses `@anthropic-ai/sdk` which needs to be available at build time in the functions directory. May need a separate `package.json` in `netlify/functions/` or configure Netlify's bundler.
-- [ ] `border-l-3` in VerseDisplay.tsx is not a default Tailwind class — either add to config or use `border-l-[3px]`.
+- [x] Path aliases: Vite config has `@/` alias — resolved via `vite-tsconfig-paths` pattern in vite.config.ts
+- [x] The Netlify Function uses `@anthropic-ai/sdk` — bundled correctly by Netlify's function bundler
+- [x] `border-l-3` in VerseDisplay.tsx — changed to `border-l-2` (valid Tailwind class)
 
 ### Feature TODOs
-- [ ] **Explore panel chapter randomization:** Currently hardcoded to chapter 1 in the Netlify function's explore handler. Should randomize based on selected book's chapter count.
-- [ ] **Error handling refinement:** Add retry logic and better user-facing error messages.
-- [ ] **Favicon/icon:** Need an SVG icon for the app (referenced in index.html as `selah-icon.svg`).
-- [ ] **Mobile responsiveness:** Components are built responsive-first but need testing on actual mobile viewports.
-- [ ] **ESV API fallback:** If verse fetch fails, the card should still display gracefully without verse text.
+- [x] **Explore panel chapter randomization:** Now randomizes chapter based on book's chapter count in `generate-prompts.ts`
+- [x] **Error handling refinement:** ESV retry logic added; Anthropic JSON parse hardened; React ErrorBoundary added
+- [ ] **Favicon/icon:** Need an SVG icon for the app (referenced in index.html as `selah-icon.svg`)
+- [ ] **Mobile responsiveness:** Components built responsive-first but need testing on actual mobile viewports
+- [x] **ESV API fallback:** Cards gracefully display without verse text if fetch fails
+- [x] **Save/Share prompts:** Copy and download buttons added to PromptCard and ExplorePanel (Feature 1)
+- [x] **Biblical Names Glossary:** 150+ figures with A-Z nav, search, and relationship chips (Feature 2)
+- [x] **Name Highlighting:** Biblical names in prompts are clickable, opening glossary side panel / bottom sheet (Feature 3)
+- [x] **AI Reading Plan Generator:** Personalized multi-day plans with progress tracking (Feature 4)
 
-### Future Features (Day 2 / Post-MVP)
-- [ ] **Daily Reading Plan mode:** Data model is ready (`dailyPlanEligible` flag on books, Proverbs has 31 chapters = 31 days). Would use date's day-of-month as chapter index instead of random.
-- [ ] **User accounts + database:** Move to Railway backend, PostgreSQL for storing user preferences and prompt history.
-- [ ] **Share prompts:** Generate a shareable link or image for a specific prompt.
-- [ ] **Prompt bookmarking:** Save favorites to localStorage (pre-database) or user account (post-database).
+### Future Features
+- [ ] **User accounts + database:** Move to Railway backend, PostgreSQL for storing user preferences and prompt history
+- [ ] **Prompt bookmarking:** Save favorites to localStorage (pre-database) or user account (post-database)
+- [ ] **Loading skeletons:** Replace bouncing dots with pulsing skeleton cards
+- [ ] **Verse of the Day widget:** Small card above daily prompts with a well-known verse per day
+- [ ] **Dark mode:** Tailwind dark: variant toggle in header
 
 ---
 
