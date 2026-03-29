@@ -83,7 +83,10 @@ export async function generateStudyPrompt(
     throw new Error('No text content in Haiku response');
   }
 
-  // Parse JSON response
-  const parsed = JSON.parse(textBlock.text) as HaikuPromptResult;
+  // Strip markdown code fences if Haiku wraps the JSON in them
+  let jsonText = textBlock.text.trim();
+  jsonText = jsonText.replace(/^```(?:json)?\s*\n?/, '').replace(/\n?```\s*$/, '');
+
+  const parsed = JSON.parse(jsonText) as HaikuPromptResult;
   return parsed;
 }
