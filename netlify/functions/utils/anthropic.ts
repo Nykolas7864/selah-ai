@@ -87,6 +87,11 @@ export async function generateStudyPrompt(
   let jsonText = textBlock.text.trim();
   jsonText = jsonText.replace(/^```(?:json)?\s*\n?/, '').replace(/\n?```\s*$/, '');
 
-  const parsed = JSON.parse(jsonText) as HaikuPromptResult;
+  let parsed: HaikuPromptResult;
+  try {
+    parsed = JSON.parse(jsonText) as HaikuPromptResult;
+  } catch {
+    throw new Error('AI response was not valid JSON. Please try again.');
+  }
   return parsed;
 }
