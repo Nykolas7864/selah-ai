@@ -5,10 +5,13 @@ interface HeaderProps {
   onNavigate: (view: AppView) => void;
 }
 
-/**
- * Minimal header with app name and nav toggle between Home and Explore.
- * Design: warm serif title, understated navigation.
- */
+const NAV_ITEMS: { label: string; view: AppView }[] = [
+  { label: 'Daily', view: 'home' },
+  { label: 'Explore', view: 'explore' },
+  { label: 'Glossary', view: 'glossary' },
+  { label: 'Plans', view: 'reading-plan' },
+];
+
 export default function Header({ currentView, onNavigate }: HeaderProps) {
   return (
     <header className="w-full border-b border-parchment-300 bg-parchment-50/80 backdrop-blur-sm sticky top-0 z-10">
@@ -21,28 +24,22 @@ export default function Header({ currentView, onNavigate }: HeaderProps) {
           Selah<span className="text-gold-600">-AI</span>
         </h1>
 
-        {/* Navigation toggle */}
-        <nav className="flex gap-1 bg-parchment-200 rounded-full p-1">
-          <button
-            onClick={() => onNavigate('home')}
-            className={`px-4 py-1.5 rounded-full text-sm font-sans font-medium transition-colors ${
-              currentView === 'home'
-                ? 'bg-white text-olive-800 shadow-sm'
-                : 'text-olive-600 hover:text-olive-800'
-            }`}
-          >
-            Daily
-          </button>
-          <button
-            onClick={() => onNavigate('explore')}
-            className={`px-4 py-1.5 rounded-full text-sm font-sans font-medium transition-colors ${
-              currentView === 'explore'
-                ? 'bg-white text-olive-800 shadow-sm'
-                : 'text-olive-600 hover:text-olive-800'
-            }`}
-          >
-            Explore
-          </button>
+        {/* Navigation */}
+        <nav className="flex gap-1 bg-parchment-200 rounded-full p-1 overflow-x-auto">
+          {NAV_ITEMS.map(({ label, view }) => (
+            <button
+              key={view}
+              aria-label={`Navigate to ${label}`}
+              onClick={() => onNavigate(view)}
+              className={`px-3 py-1.5 rounded-full text-sm font-sans font-medium transition-colors whitespace-nowrap ${
+                currentView === view
+                  ? 'bg-white text-olive-800 shadow-sm'
+                  : 'text-olive-600 hover:text-olive-800'
+              }`}
+            >
+              {label}
+            </button>
+          ))}
         </nav>
       </div>
     </header>

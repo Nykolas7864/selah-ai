@@ -53,4 +53,19 @@ export interface ExploreRequest {
 }
 
 /** View state for the app */
-export type AppView = 'home' | 'explore';
+export type AppView = 'home' | 'explore' | 'glossary' | 'reading-plan';
+
+export interface GlossaryRelationship {
+  name: string;
+  relationship: string; // e.g. "Father of", "Wife of", "Disciple"
+}
+
+export interface GlossaryEntry {
+  name: string;
+  alternateNames: string[];
+  nameMeaning: string;
+  testament: 'OT' | 'NT' | 'Both';
+  summary: string; // 2-3 sentences
+  keyRelationships: GlossaryRelationship[];
+  keyVerses: string[]; // e.g. ["Genesis 12:1", "Hebrews 11:8"]
+}
